@@ -7,7 +7,7 @@ int main()
     
     setlocale(0, "");
     cout << "Введите радиус окружности R: ";
-    double R,a,b,X,Y,x,y,x2,y2,d;//X,Y-точка
+    double R,a,b,X,Y,x,y,x2,y2,d,eps;//X,Y-точка
     cin >> R;
     if (R <= 0)
     {
@@ -18,6 +18,8 @@ int main()
     cin >> a;
     cout << "Введите b из уравнения прямой y = ax + b: ";
     cin >> b;
+    cout << "Введите ширину границы: ";
+    cin >> eps;
     x = -400;
     y = a*x+b  ;//1 точка прямой
     x2 = 400;
@@ -31,7 +33,7 @@ int main()
             //плоскость есть
             cout << "Введите координаты точки X,Y: ";
             cin >> X >> Y;
-            if (X > 0 && Y < 0 && Y >(a * X + b) && (sqrt(X * X + Y * Y)) < R)
+            if (X > 0 && Y < 0 && abs((a * X + b)-Y)>eps && abs(R-(sqrt(X * X + Y * Y)))>eps)
             {
                 cout << "Точка существует!!!" << endl;
                 exsist = 1;
@@ -44,7 +46,7 @@ int main()
             //плоскость есть
             cout << "Введите координаты точки X,Y: ";
             cin >> X >> Y;
-            if (X > 0 && Y < 0 && Y >(a * X + b) && (sqrt(X * X + Y * Y)) < R)
+            if (X > 0 && Y < 0 && abs((a * X + b) - Y)>eps && abs(R - (sqrt(X * X + Y * Y))) > eps)
             {
                 cout << "Точка существует!!!" << endl;
                 exsist = 1;
@@ -64,7 +66,7 @@ int main()
             //плоскость есть
             cout << "Введите координаты точки X,Y: ";
             cin >> X >> Y;
-            if (X > 0 && Y < 0 && Y >(a * X + b) && (sqrt(X * X + Y * Y)) < R)
+            if (X > 0 && Y < 0 && abs((a * X + b)-Y)>eps && abs(R-(sqrt(X * X + Y * Y)))>eps)
             {
                 cout << "Точка существует!!!" << endl;
                 exsist = 1;
