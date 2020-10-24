@@ -13,71 +13,55 @@ int main()
     {
         cout << "Радиус меньше 0. Завершение программы" << endl;
         return 0;
+        system("pause");
     }
     cout << "Введите a из уравнения прямой y = ax + b: ";
     cin >> a;
     cout << "Введите b из уравнения прямой y = ax + b: ";
     cin >> b;
+    if (b > 0 && a >= 0)
+    {
+        cout << "Плоскости нет" << endl;
+        return 0;
+        system("pause");
+    }
     cout << "Введите ширину границы: ";
     cin >> eps;
     x = -400;
     y = a*x+b  ;//1 точка прямой
     x2 = 400;
     y2 = a * x2 + b  ;//2 точка прямой
-    d = abs(((x2 - x) * (0 - y) - (0 - x) * (y2 - y)) / sqrt((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y)));
+    d = abs(((x2 - x) * (0 - y) - (0 - x) * (y2 - y)) / sqrt((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y)));//расстояние от прямой до центра окр
     bool exsist = 0;
-    if (d <= R)
+    
+    if( ( (b > 0 && a < 0) && (a * R + b <= 0) ) || (b < 0) || (b == 0 && a==0) )
     {
-        if (a>0 && b<0)
+        cout << "Введите X: ";
+        cin >> X;
+        cout << "Введите Y: ";
+        cin >> Y;
+        if ((abs(X)<=abs(eps) && X >= 0) || (abs(Y)<=abs(eps) && Y <= 0) || ((a * X + b) <= Y && abs(a * X + b) - abs(Y) <= abs(eps)) || ( (R*R-X*X-Y*Y) >= 0) && (R*R-X*X-Y*Y) <= abs(eps))//попадает на границу
         {
-            //плоскость есть
-            cout << "Введите координаты точки X,Y: ";
-            cin >> X >> Y;
-            if (X > 0 && Y < 0 && abs((a * X + b)-Y)>eps && abs(R-(sqrt(X * X + Y * Y)))>eps)
-            {
-                cout << "Точка существует!!!" << endl;
-                exsist = 1;
-            }
-            else
-                cout << "Точки нет!!!" << endl;
+            cout << "Точка на границе" << endl;
+            exsist = 1;
         }
-        else if (a < 0 && -(b/a) < R)
+        if (X < 0 || Y > 0 || (R*R - Y*Y -X*X) < 0 || Y < a*X+b)//снаружи
         {
-            //плоскость есть
-            cout << "Введите координаты точки X,Y: ";
-            cin >> X >> Y;
-            if (X > 0 && Y < 0 && abs((a * X + b) - Y)>eps && abs(R - (sqrt(X * X + Y * Y))) > eps)
-            {
-                cout << "Точка существует!!!" << endl;
-                exsist = 1;
-            }
-            else
-                cout << "Точки нет!!!" << endl;
+            cout << "Точки нет!!" << endl;
+            return 0;
+            system("pause");
         }
         else
         {
-            cout << "Плоскости нет" << endl;
+            cout << "Точка существует!!" << endl;
+            exsist = 1;
         }
     }
     else
     {
-        if (abs(b)>R && b < 0)
-        {
-            //плоскость есть
-            cout << "Введите координаты точки X,Y: ";
-            cin >> X >> Y;
-            if (X > 0 && Y < 0 && abs((a * X + b)-Y)>eps && abs(R-(sqrt(X * X + Y * Y)))>eps)
-            {
-                cout << "Точка существует!!!" << endl;
-                exsist = 1;
-            }
-            else
-                cout << "Точки нет!!!" << endl;
-        }
-        else
-        {
-            cout << "Плоскости нет" << endl;
-        }
+        cout << "Плоскости нет" << endl;
+        return 0;
+        system("pause");
     }
 
 
@@ -131,9 +115,9 @@ int main()
             line[1].color = sf::Color::Red;
             window.draw(line);
 
-            CircleShape dot(0.2);
+            CircleShape dot(0.1);
             dot.setFillColor(Color::Cyan);
-            dot.move(X, Y);
+            dot.move(X-0.1, Y-0.1);
             window.draw(dot);
 
             window.display();
