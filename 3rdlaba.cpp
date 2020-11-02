@@ -1,5 +1,6 @@
 ﻿#include <SFML/Graphics.hpp>
 #include <iostream>
+
 using namespace std;
 using namespace sf;
 int main()
@@ -12,8 +13,8 @@ int main()
     if (R <= 0)
     {
         cout << "Радиус меньше 0. Завершение программы" << endl;
+        system("PAUSE");
         return 0;
-        system("pause");
     }
     cout << "Введите a из уравнения прямой y = ax + b: ";
     cin >> a;
@@ -22,8 +23,8 @@ int main()
     if (b > 0 && a >= 0)
     {
         cout << "Плоскости нет" << endl;
+        system("PAUSE");
         return 0;
-        system("pause");
     }
     cout << "Введите ширину границы: ";
     cin >> eps;
@@ -48,8 +49,8 @@ int main()
         if (X < 0 || Y > 0 || (R*R - Y*Y -X*X) < 0 || Y < a*X+b)//снаружи
         {
             cout << "Точки нет!!" << endl;
+            system("PAUSE");
             return 0;
-            system("pause");
         }
         else
         {
@@ -60,8 +61,8 @@ int main()
     else
     {
         cout << "Плоскости нет" << endl;
+        system("PAUSE");
         return 0;
-        system("pause");
     }
 
 
@@ -123,6 +124,6 @@ int main()
             window.display();
         }
     }
-    system("pause");
+    system("PAUSE");
     return 0;
 }
